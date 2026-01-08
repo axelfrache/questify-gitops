@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: questify-landing
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    argocd-image-updater.argoproj.io/image-list: landing=registry.axelfrache.com/questify/landing
+    argocd-image-updater.argoproj.io/landing.allow-tags: regexp:^[0-9a-f]{7,40}$
+    argocd-image-updater.argoproj.io/landing.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/landing.helm.image-tag: image.tag
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: questify
+
+  source:
+    repoURL: https://github.com/axelfrache/questify-landing.git
+    targetRevision: HEAD
+    path: charts/landing
+    helm:
+      releaseName: questify-landing
+      valueFiles:
+        - values.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: questify
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - ServerSideApply=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
+
