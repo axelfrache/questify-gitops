@@ -55,4 +55,4 @@ kubectl apply -f apps/root.yaml
 
 ## License
 
-MIT
+[MIT](LICENSE)
