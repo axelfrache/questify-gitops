@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-    argocd-image-updater.argoproj.io/image-list: backend=registry.axelfrache.com/questify/backend
+    argocd-image-updater.argoproj.io/image-list: backend=axelfrache/questify-backend
     argocd-image-updater.argoproj.io/backend.allow-tags: regexp:^sha-[0-9a-f]{7,40}$
     argocd-image-updater.argoproj.io/backend.update-strategy: newest-build
     argocd-image-updater.argoproj.io/write-back-method: argocd
