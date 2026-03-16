@@ -6,8 +6,8 @@ metadata:
 data:
   registries.conf: |
     registries:
-      - name: axelfrache-registry
-        prefix: registry.axelfrache.com
-        api_url: https://registry.axelfrache.com
-        credentials: pullsecret:argocd/regcred
+      - name: Docker Hub
+        prefix: docker.io
+        api_url: https://registry-1.docker.io
+        defaultns: library
         default: true

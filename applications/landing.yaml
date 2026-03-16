@@ -5,10 +5,11 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-    argocd-image-updater.argoproj.io/image-list: landing=registry.axelfrache.com/questify/landing
+    argocd-image-updater.argoproj.io/image-list: landing=axelfrache/questify-landing
     argocd-image-updater.argoproj.io/landing.allow-tags: regexp:^sha-[0-9a-f]{7,40}$
     argocd-image-updater.argoproj.io/landing.update-strategy: newest-build
     argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/landing.helm.image-name: image.repository
     argocd-image-updater.argoproj.io/landing.helm.image-tag: image.tag
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -41,4 +42,3 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 1m
-
