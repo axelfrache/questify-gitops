@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: questify-backend
+  name: questify-auth-service
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-    argocd-image-updater.argoproj.io/image-list: backend=axelfrache/questify-backend
-    argocd-image-updater.argoproj.io/backend.allow-tags: regexp:^sha-[0-9a-f]{7,40}$
-    argocd-image-updater.argoproj.io/backend.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/image-list: auth=axelfrache/questify-auth-service
+    argocd-image-updater.argoproj.io/auth.allow-tags: regexp:^sha-[0-9a-f]{7,40}$
+    argocd-image-updater.argoproj.io/auth.update-strategy: newest-build
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/backend.helm.image-name: image.repository
-    argocd-image-updater.argoproj.io/backend.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/auth.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/auth.helm.image-tag: image.tag
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -19,9 +19,9 @@ spec:
   source:
     repoURL: https://github.com/axelfrache/questify.git
     targetRevision: HEAD
-    path: charts/questify-backend
+    path: charts/questify-auth-service
     helm:
-      releaseName: questify-backend
+      releaseName: questify-auth-service
       valueFiles:
         - values.yaml
 
