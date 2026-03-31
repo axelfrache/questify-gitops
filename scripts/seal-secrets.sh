@@ -23,6 +23,7 @@ JWT_SECRET="$(openssl rand -hex 32)"
 
 RABBITMQ_USER="questify"
 RABBITMQ_PASSWORD="$(openssl rand -hex 24)"
+RABBITMQ_ERLANG_COOKIE="$(openssl rand -hex 32)"
 
 GARAGE_ACCESS_KEY_ID="GK$(openssl rand -hex 12)"
 GARAGE_SECRET_ACCESS_KEY="$(openssl rand -hex 32)"
@@ -81,6 +82,7 @@ echo "Sealing RabbitMQ secret..."
 seal questify-rabbitmq questify \
     --from-literal=username="$RABBITMQ_USER" \
     --from-literal=password="$RABBITMQ_PASSWORD" \
+    --from-literal=erlang-cookie="$RABBITMQ_ERLANG_COOKIE" \
     > "$MANIFESTS_DIR/sealed-rabbitmq.yaml"
 echo "  -> $MANIFESTS_DIR/sealed-rabbitmq.yaml"
 
